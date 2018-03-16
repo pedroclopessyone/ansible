@@ -4,7 +4,7 @@
      name: nginx
      state: latest
 
- - name: Install PHP and ensure its at the latest version
+ - name: Install PHP package and ensure its at the latest version
    yum:
      name: php
      state: latest
