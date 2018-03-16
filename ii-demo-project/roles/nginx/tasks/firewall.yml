@@ -1,0 +1,13 @@
+---
+- name: Ensuring Firewalld is running (and enabled at boot)
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+
+- name: Adding Firewall Rules to HTTP (port 80)
+  firewalld:
+    service: http
+    permanent: true
+    state: enabled
+  notify: restart firewall service

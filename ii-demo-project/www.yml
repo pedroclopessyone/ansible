@@ -1,0 +1,15 @@
+---
+- hosts: www
+  remote_user: root
+  pre_tasks:
+  - name: Beginning to configure web server & Writing Output to Remote File
+    shell: echo "" &>> /var/tmp/begin_config_webserver.txt ; echo "############################################################################" &>> /var/tmp/begin_config_webserver.txt ; /usr/bin/date  &>> /var/tmp/begin_config_webserver.txt ; /usr/bin/uptime  &>> /var/tmp/begin_config_webserver.txt ; /usr/bin/free -h &>> /var/tmp/begin_config_webserver.txt ; echo "############################################################################" &>> /var/tmp/begin_config_webserver.txt
+    ignore_errors: True
+
+  roles:
+     - nginx
+
+  post_tasks:
+  - name: Done configuring nginx web server & Writing Output to Remote File
+    shell: echo "" &>> /var/tmp/end_config_webserver.txt ; echo "############################################################################" &>> /var/tmp/end_config_webserver.txt ; /usr/bin/date  &>> /var/tmp/end_config_webserver.txt ; /usr/bin/uptime  &>> /var/tmp/end_config_webserver.txt; /usr/bin/free -h &>> /var/tmp/end_config_webserver.txt ; echo "############################################################################" &>> /var/tmp/end_config_webserver.txt
+    ignore_errors: True
