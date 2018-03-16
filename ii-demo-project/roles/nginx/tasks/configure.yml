@@ -1,0 +1,29 @@
+---
+- name: create default site configurations
+  copy:
+    src: default.conf
+    dest: /etc/nginx/conf.d/default.conf
+    mode: 0644
+  notify:
+  - restart nginx service
+
+- name: Copying II & Syone Logos
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+  with_items:
+    - { src: 'logo-ii.png', dest: '/usr/share/nginx/html' }
+    - { src: 'logo-ii-16x16.png', dest: '/usr/share/nginx/html' }
+    - { src: 'syone-logo.png', dest: '/usr/share/nginx/html' }
+    - { src: 'favicon-32x32.png', dest: '/usr/share/nginx/html' }
+    - { src: 'openshift-logo.png', dest: '/usr/share/nginx/html' }
+    - { src: 'ansible-logo.png', dest: '/usr/share/nginx/html' }
+  notify:
+  - restart nginx service
+
+- name: create home page for default site
+  copy:
+    src: index.html
+    dest: /usr/share/nginx/html/index.html
+  notify:
+  - restart nginx service

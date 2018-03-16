@@ -1,0 +1,10 @@
+---
+ - name: install nginx web server and ensure its at the latest version
+   yum:
+     name: nginx
+     state: latest
+
+ - name: Install PHP and ensure its at the latest version
+   yum:
+     name: php
+     state: latest
